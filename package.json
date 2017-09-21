@@ -1,0 +1,120 @@
+{
+  "name": "RSS",
+  "version": "1.0.0",
+  "description": "RSS reader on ReactJS",
+  "main": "./src/index.js",
+  "scripts": {
+    "lint": "eslint server/**/*.js src/**/*.js webpack/**/*.js --ignore-pattern *.test.js",
+    "test": "better-npm-run test",
+    "test:watch": "npm run test -- --watch",
+    "start": "babel-node ./server/server-prod.js",
+    "dev": "better-npm-run dev",
+    "devmon": "nodemon --ignore ./src --exec better-npm-run dev",
+    "build": "npm run lint && better-npm-run build",
+    "dll:dev": "better-npm-run dll:dev",
+    "dll:prod": "better-npm-run dll:prod",
+    "dll": "npm run dll:dev && npm run dll:prod",
+    "postinstall": "npm run dll",
+    "postuninstall": "npm run dll",
+    "webpack": "babel-node node_modules/webpack/bin/webpack.js"
+  },
+  "engines": {
+    "node": ">=6.10.0"
+  },
+  "betterScripts": {
+    "dev": {
+      "command": "babel-node ./server/server-dev.js",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "build": {
+      "command": "npm run webpack -- --optimize-minimize --color --progress --config=webpack/webpack.config.prod.js",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "test": {
+      "command": "jest",
+      "env": {
+        "NODE_ENV": "test"
+      }
+    },
+    "dll:prod": {
+      "command": "npm run webpack -- --color --progress --config=webpack/webpack.config.dll.js",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "dll:dev": {
+      "command": "npm run webpack -- --color --progress --config=webpack/webpack.config.dll.js",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/graymur/RSS"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/graymur/RSS/issues"
+  },
+  "homepage": "https://github.com/graymur/RSS#readme",
+  "dependencies": {
+    "babel-preset-env": "^1.6.0",
+    "classnames": "^2.2.5",
+    "express": "^4.15.3",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.2.1",
+    "reselect": "^3.0.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.2",
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-react": "^6.22.0",
+    "better-npm-run": "^0.0.15",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.4",
+    "css-mqpacker": "^6.0.1",
+    "eslint": "^4.3.0",
+    "eslint-config-standard": "^10.0.0",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.28.0",
+    "img-loader": "^2.0.0",
+    "merge-deep": "^3.0.0",
+    "node-sass": "^4.5.3",
+    "opener": "^1.4.2",
+    "postcss-loader": "^2.0.6",
+    "react-addons-test-utils": "^15.6.0",
+    "react-hot-loader": "^3.0.0-beta.7",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "svg-url-loader": "^2.1.1",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.4.1",
+    "webpack-bundle-analyzer": "^2.8.3",
+    "webpack-dev-middleware": "^1.10.0",
+    "webpack-hot-middleware": "^2.18.2",
+    "webpack-node-externals": "^1.6.0"
+  }
+}
