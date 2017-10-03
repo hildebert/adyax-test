@@ -23,17 +23,18 @@ export class Main extends React.Component {
 		changeSku: PropTypes.func
 	};
 
+	handleAddToBasket = id => this.props.addToBasket(id);
+	handleIncrement = id => this.props.incrementQuantity(id);
+	handleDecrement = id => this.props.decrementQuantity(id);
+	handleRemove = id => this.props.removeFromBasket(id);
+	handleSkuChange = (id, sku) => this.props.changeSku(id, sku);
+
 	render() {
 		const {
 			currentProducts,
 			currentProductsIds,
 			products,
-			addToBasket,
-			cartTotal,
-			incrementQuantity,
-			decrementQuantity,
-			removeFromBasket,
-			changeSku
+			cartTotal
 		} = this.props;
 
 		return (
@@ -43,17 +44,17 @@ export class Main extends React.Component {
 						key={product.id}
 						inBasket={Boolean(currentProductsIds.includes(product.id))}
 						product={product}
-						addToBasket={() => addToBasket(product.id)}
+						addToBasket={this.handleAddToBasket}
 					/>)}
 				</ProductsList>
 				<Cart total={cartTotal}>
 					<ProductsList className='cart-products'>
 						{currentProducts.map(product => <CartProduct {...product}
 							key={product.id}
-							onIncrement={() => incrementQuantity(product.id)}
-							onDecrement={() => decrementQuantity(product.id)}
-							onDelete={() => removeFromBasket(product.id)}
-							onSkuChange={(value) => changeSku(product.id, value)}
+							onIncrement={this.handleIncrement}
+							onDecrement={this.handleDecrement}
+							onDelete={this.handleRemove}
+							onSkuChange={this.handleSkuChange}
 						/>)}
 					</ProductsList>
 				</Cart>

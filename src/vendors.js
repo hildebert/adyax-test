@@ -7,3 +7,4 @@ require('redux');
 require('redux-actions');
 require('reselect');
 require('redbox-react');
+require('recompose');

@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProductInfo from '../ProductInfo';
 import classNames from 'classnames';
+import pure from 'recompose/pure';
 
 import './product.scss';
 
-export default function Product({product, inBasket = false, addToBasket}) {
+export function Product({product, inBasket = false, addToBasket}) {
 	const className = classNames({
 		'product': true,
 		'_in-basket': inBasket
@@ -14,7 +15,7 @@ export default function Product({product, inBasket = false, addToBasket}) {
 	return (
 		<div className={className}>
 			<ProductInfo {...product}>
-				<button className='product__add-to-basket' onClick={addToBasket}>Add to basket</button>
+				<button className='product__add-to-basket' onClick={() => addToBasket(product.id)}>Add to basket</button>
 			</ProductInfo>
 		</div>
 	);
@@ -25,3 +26,5 @@ Product.propTypes = {
 	addToBasket: PropTypes.func,
 	inBasket: PropTypes.bool
 };
+
+export default pure(Product);
